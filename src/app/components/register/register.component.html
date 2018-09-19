@@ -1,0 +1,43 @@
+<section>
+  <h1 style="text-align: center;">Formulario de Registro</h1>
+  <form class=Fm novalidate [formGroup]="registerForm" (ngSubmit)="enviar(registerForm)">
+    <div>
+      <label> Documento de identidad: </label>
+      <input class="input" type="text" formControlName="documento">
+      <div class="error" *ngIf="registerForm.get('documento').hasError('required') && registerForm.get('documento').touched">
+        Este campo es requerido.
+      </div>
+      <div class="error" *ngIf="registerForm.get('documento').hasError('pattern') && registerForm.get('documento').touched">
+        El campo debe ser numerico.
+      </div>
+    </div>
+    <div>
+      <label> Nombre: </label>
+      <input class="input" type="text" formControlName="nombre">
+      <div class="error" *ngIf="registerForm.get('nombre').hasError('required') && registerForm.get('nombre').touched">
+        Este campo es requerido.
+      </div>
+    </div>
+    <div>
+      <label> Apellido: </label>
+      <input class="input" type="text" formControlName="apellido">
+      <div class="error" *ngIf="registerForm.get('apellido').hasError('required') && registerForm.get('apellido').touched">
+        Este campo es requerido.
+      </div>
+    </div>
+    <div>
+      <label> Fecha de nacimiento: </label>
+      <input class="input" type="date" formControlName="fechaNacimiento">
+      <div class="error" *ngIf="registerForm.get('fechaNacimiento').hasError('required') && registerForm.get('fechaNacimiento').touched">
+        Este campo es requerido.
+      </div>
+      <div class="error" *ngIf="registerForm.get('fechaNacimiento').hasError('age')">
+        Tienes que ser mayor de 18 años.
+      </div>
+    </div>
+    <div>
+      <button class="btn" type="submit" [disabled]="registerForm.invalid">Guardar</button>
+    </div>
+  </form>
+
+</section>
