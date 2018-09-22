@@ -1,0 +1,15 @@
+.error{
+    color: red;
+}
+.formulario {
+    text-align: center;
+}
+.input{
+    border-radius: 5px;
+}
+
+.busqueda {
+    margin: 16px;
+    padding: 16px;
+    text-align: center;
+}

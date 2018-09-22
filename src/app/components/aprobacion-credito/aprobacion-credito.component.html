@@ -1,0 +1,66 @@
+<section class="busqueda">
+  <div>
+    <label>Ingresar numero de identificacion </label>
+    <input class="input" type="text" #nId>
+    <button (click)="buscarUsuario(nId.value)">Buscar</button>
+    <div class="error">
+      {{message}}
+    </div>
+  </div>
+</section>
+
+<section *ngIf="usuarioExiste">
+  <h1 style="text-align: center;">Solicitud Credito para usuario: {{usuario.nombre}}</h1>
+  <form class="formulario" novalidate [formGroup]="solicitudCredito" (submit)="calculateLoan(solicitudCredito.value)">
+    <div>
+      <label>Nombre de la empresa: </label>
+      <input class="input" type="text" formControlName="nombreEmpresa">
+
+      <div class="error" *ngIf="solicitudCredito.get('nombreEmpresa').hasError('required') && solicitudCredito.get('nombreEmpresa').touched">
+        Este campo es requerido.
+      </div>
+    </div>
+
+    <div>
+      <label>NIT de la empresa: </label>
+      <input class="input" type="text" formControlName="NIT">
+      <div class="error" *ngIf="solicitudCredito.get('NIT').hasError('required') && solicitudCredito.get('NIT').touched">
+        Este campo es requerido.
+      </div>
+      <div class="error" *ngIf="solicitudCredito.get('NIT').hasError('pattern') && solicitudCredito.get('NIT').touched">
+        El campo debe ser numerico.
+      </div>
+    </div>
+
+    <div>
+      <label>Salario Actual: </label>
+      <input class="input" type="number" formControlName="salario">
+      <div class="error" *ngIf="solicitudCredito.get('salario').hasError('requerido') && solicitudCredito.get('salario').touched">
+        Este campo es requerido.
+      </div>
+      <div class="error" *ngIf="solicitudCredito.get('salario').hasError('pattern') && solicitudCredito.get('salario').touched">
+        El campo debe ser numerico.
+      </div>
+      <div class="error" *ngIf="solicitudCredito.get('salario').hasError('max') && solicitudCredito.get('salario').touched">
+        El salario no debe ser mayor a 100000000.
+      </div>
+    </div>
+
+    <div>
+      <label> Fecha de ingreso: </label>
+      <input class="input" type="date" formControlName="fechaIngreso">
+      <div class="error" *ngIf="solicitudCredito.get('fechaIngreso').hasError('required') && solicitudCredito.get('fechaIngreso').touched">
+        Este campo es requerido.
+      </div>
+      <div class="error" *ngIf="solicitudCredito.get('fechaIngreso').hasError('tiempo')">
+        La fecha no puede ser futura.
+      </div>
+    </div>
+    <div>
+      <button class="btn" type="submit" [disabled]="solicitudCredito.invalid">Solicitar credito</button>
+    </div>
+  </form>
+
+  <div class="busqueda">
+    {{mensajeAprobacion}}
+  </div>

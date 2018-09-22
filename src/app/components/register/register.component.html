@@ -1,14 +1,17 @@
 <section>
-  <h1 style="text-align: center;">Formulario de Registro</h1>
-  <form class=Fm novalidate [formGroup]="registerForm" (ngSubmit)="enviar(registerForm)">
+  <h1 class="titulo" style="text-align: center;">Formulario de Registro</h1>
+  <form class=Formulario novalidate [formGroup]="registerForm" (ngSubmit)="enviar(registerForm.value)">
     <div>
       <label> Documento de identidad: </label>
-      <input class="input" type="text" formControlName="documento">
+      <input class="input" type="text" formControlName="documento" id="document">
       <div class="error" *ngIf="registerForm.get('documento').hasError('required') && registerForm.get('documento').touched">
         Este campo es requerido.
       </div>
       <div class="error" *ngIf="registerForm.get('documento').hasError('pattern') && registerForm.get('documento').touched">
         El campo debe ser numerico.
+      </div>
+      <div class="error" *ngIf="documentoExiste">
+        El usuario ya se encuentra registrado.
       </div>
     </div>
     <div>
@@ -36,8 +39,19 @@
       </div>
     </div>
     <div>
-      <button class="btn" type="submit" [disabled]="registerForm.invalid">Guardar Informacion</button>
+      <button class="botonEnviar" type="submit" [disabled]="registerForm.invalid || documentoExiste">Guardar
+        Informacion</button>
     </div>
   </form>
 
 </section>
+
+<!-- registros
+<ul>
+  <li class="text" *ngFor="let item of items | async">
+    <span>{{item.documento}}</span>,
+    <span>{{item.nombre}}</span>,
+    <span>{{item.apellido}}</span>,
+    <span>{{item.fechaNacimiento}}</span><br><br>
+  </li>
+</ul> -->

@@ -1,17 +1,14 @@
-.h1{
+.titulo{
     text-align: center;
 }
 .error{
     color: red;
 }
-.Fm{
-    position: absolute;
-    top: 100px;
-    align-content: center;
-    left:  500px;
+.Formulario{
+   text-align: center;
     
 }
-.btn{
+.botonEnviar{
     border-radius: 5px;
 }
 .input{
